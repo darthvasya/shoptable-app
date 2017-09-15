@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response  } from '@angular/http';
-import { HttpClient } from "@angular/common/http";
+import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+
+ 
 
 import { Shop } from '../models/Shop';
 import { Item } from '../models/Item';
@@ -13,19 +14,21 @@ import { Item } from '../models/Item';
 
 @Injectable()
 export class ShopService {
+    private shops: Shop[] = [];
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: Http) { }
 
-    getShops() : Observable<User[]>{
-        console.log(12444)
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json;charset=utf-8');
-
- 
-        this.http.get('http://localhost:53743/api/shops').subscribe(data => {
-            // Read the result field from the JSON response.
-                console.log(data);
+  getUsers() {
+    return new Promise((resolve, reject) => {
+      this.http.get("http://localhost:53743/api/shops")
+        .map(res => res.json())
+        .catch((err) => {
+          reject(err);
+          return Observable.throw(err);
+        })
+        .subscribe((shops) => {
+          resolve(shops);   
         });
-        //console.log(shops);
-    }
+    });
+  }
 }

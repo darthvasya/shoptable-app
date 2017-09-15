@@ -1,30 +1,55 @@
-<div class="container">
+<div class="container" *ngIf="shopsVisibility">
   <h2>Магазины</h2>
-  <p>The .table-hover class enables a hover state on table rows:</p>            
+  <p>Список всех магазинов:</p>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+        <th>Название</th>
+        <th>Адресс</th>
+        <th>Начало работы</th>
+        <th>Конец работы</th>
+        <th>Товары</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
+      <tr *ngFor="let shop of shops; let i = index">
+        <td>{{shop.Name}}</td>
+        <td>{{shop.Address}}</td>
+        <td>{{shop.StartWorkTime}}.00</td>
+        <td>{{shop.EndWorkTime}}.00</td>
+        <td>
+          <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+              <button class="btn btn-success" (click)="ShowItems(i)">Товары</button>
+            </div>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div class="container" *ngIf="!shopsVisibility">
+  <h2>Товары</h2>
+  <p>Товары данного магазина:</p>
+  <div class="form-group">
+    <div class="col-md-offset-11 col-md-8">
+      <button class="btn btn-danger" (click)="ShowShops()">Назад</button>
+    </div>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Описание</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items; let i = index">
+        <td>{{item.Name}}</td>
+        <td>{{item.Description}}</td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
