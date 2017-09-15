@@ -1,3 +1,5 @@
+Адресс Api http://localhost:53743/api/shops захардкожен в ShopService
+
 # AppShoptable
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.1.
