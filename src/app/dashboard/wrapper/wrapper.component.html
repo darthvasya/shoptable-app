@@ -15,11 +15,11 @@
       <tr *ngFor="let shop of shops; let i = index">
         <td>{{shop.Name}}</td>
         <td>{{shop.Address}}</td>
-        <td>{{shop.StartWorkTime}}.00</td>
-        <td>{{shop.EndWorkTime}}.00</td>
+        <td>{{shop.StartWorkTime}}</td>
+        <td>{{shop.EndWorkTime}}</td>
         <td>
           <div class="form-group">
-            <div class="col-md-offset-2 col-md-8">
+            <div class="col-md-8">
               <button class="btn btn-success" (click)="ShowItems(i)">Товары</button>
             </div>
           </div>

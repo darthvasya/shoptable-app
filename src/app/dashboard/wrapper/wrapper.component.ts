@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
 import { ShopService } from '../../app.Common/Services/ShopService';
-import { BackendService } from '../../app.Common/services/backend.service';
 
 import { Shop } from '../../app.common/models/Shop';
 
@@ -12,7 +11,7 @@ import { Shop } from '../../app.common/models/Shop';
   selector: 'wrapper-cmp',
   templateUrl: './wrapper.component.html',
   styleUrls: ['./wrapper.component.css'],
-  providers: [BackendService, ShopService]
+  providers: [ShopService]
 })
 export class WrapperComponent {
 
@@ -33,7 +32,10 @@ export class WrapperComponent {
   private GetShops() {
     this.shopService.getUsers().then((data) => {
       this.shops = data;
-      console.log(this.shops);
+      for(var item of this.shops){
+        item.StartWorkTime = this.ConvertDateToHourAndMinutes(item.StartWorkTime);
+        item.EndWorkTime = this.ConvertDateToHourAndMinutes(item.EndWorkTime  );
+      }
     });
   }
 
@@ -46,5 +48,15 @@ export class WrapperComponent {
 
   public ShowShops() {
     this.shopsVisibility = true;
+  }
+
+  private ConvertDateToHourAndMinutes(date: any) : string 
+  {
+        date = new Date(Date.parse(date));
+
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+
+        return hours + ":" + minutes; 
   }
 }
